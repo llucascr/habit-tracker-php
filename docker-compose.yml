@@ -1,0 +1,22 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: habit_tracker_db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: habit_tracker
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - habit_tracker_network
+
+volumes:
+  mysql_data:
+    driver: local
+
+networks:
+  habit_tracker_network:
+    driver: bridge
